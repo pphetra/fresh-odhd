@@ -3,6 +3,7 @@ import re
 from tableparser import TableParser
 
 import deflation
+import oil
 
 PRODUCT_MAP= {
     'PORK_SAPOK': '941',
@@ -59,7 +60,8 @@ def build_row(product, year, row):
             _key = str(year) + '/' + month
             _yearmonth = month + '/01/' + str(year)
             _deflation = deflation.deflate_map[_key]
-            _row = [product, _yearmonth, str(row[i]), str(_deflation)]
+            _oil = oil.oil_map[_key]
+            _row = [product, _yearmonth, str(row[i]), str(_deflation), str(_oil)]
             ret_row.append(_row)
         except:
             pass
