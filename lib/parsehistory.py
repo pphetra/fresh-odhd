@@ -58,7 +58,7 @@ def build_row(product, year, row):
                 month = str(i+1)
 
             _key = str(year) + '/' + month
-            _yearmonth = month + '/01/' + str(year)
+            _yearmonth = month + '/01/' + str(int(year) - 543)
             _deflation = deflation.deflate_map[_key]
             _oil = oil.oil_map[_key]
             _row = [product, _yearmonth, str(row[i]), str(_deflation), str(_oil)]
