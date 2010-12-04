@@ -1,0 +1,101 @@
+<html>
+<head>
+    <title>Food Price</title>
+    <link rel="stylesheet" href="/static/sencha/resources/css/sencha-touch.css" type="text/css">
+    <link rel="stylesheet" href="/static/custom.css" type="text/css">
+    <script type="text/javascript" src="/static/sencha/sencha-touch.js"></script>
+    <script type="text/javascript" src="/static/raphael/raphael.js"></script>
+    <script type="text/javascript" src="/static/raphael/g.raphael.js"></script>
+    <script type="text/javascript" src="/static/raphael/g.line.js"></script>
+
+    <script>
+Ext.setup({
+
+    onReady: function() {
+        carousel = new Ext.Carousel({
+            ui: 'light',
+            items: [
+                {
+                    layout: {
+                        type: 'vbox',
+                        align: 'stretch'
+                    },  
+                    items: [
+                        {
+                            xtype: 'button',
+
+                            text: 'history',
+                            width: 100,
+                            handler: function() {
+                                if (! this.popup) {
+                                    this.popup = new Ext.Panel({
+                                        floating: true,
+                                        modal: true,
+                                        centered: true,
+                                        width: 500,
+                                        height: 400,
+                                        html: 'Hello <div id="graph" style="width: 450;"></div>',
+                                        listeners: {
+                                            'afterrender': function() {
+                                                var r = Raphael('graph');
+                                                r.g.linechart(10, 10, 300, 220, [[1, 2, 3, 4, 5, 6, 7],[3.5, 4.5, 5.5, 6.5, 7, 8]], [[12, 32, 23, 15, 17, 27, 22], [10, 20, 30, 25, 15, 28]], {nostroke: false, axis: "0 0 1 1", symbol: "o", smooth: true});
+                                            }
+                                        }
+                                    })
+                                }
+                                this.popup.show();
+                            }
+                        },
+                        {           
+                            flex: 1,             
+                            layout: {
+                                type: 'hbox',
+                                align: 'center'
+                            },
+                            items: [
+                                {
+                                    flex: 2,
+                                    html: 'image'
+                                },
+                                {
+                                    flex: 1,
+                                    
+                                    html: '<span class="price">40.00</span>'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    html: 'page 2'
+                },
+                {
+                    html: 'page 3'
+                }
+            
+            ]
+        });
+        
+        panel = new Ext.Panel({
+            fullscreen: true,
+            styleHtmlContent: true,
+            renderTo: document.body,
+            layout: {
+                type: 'vbox',
+                align: 'stretch'
+            },
+            defaults: {
+                flex: 1
+            },
+            items: [
+                carousel
+            ]
+        });
+        
+    }
+});
+    </script>
+</head>
+<body>    
+</body>
+</html>
